@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Mini App Embed / Meta Tags -->
+    <meta name="fc:miniapp" content='{"version":"1","imageUrl":"https://your-domain.com/preview.png","button":{"title":"Open The Shill Report","action":{"type":"launch_frame","url":"https://your-domain.com","name":"The Shill Report"}}}' />
+    <title>The Shill Report Mini App</title>
+    <style>
+      body { font-family: sans-serif; text-align: center; padding: 40px; }
+      .btn { display: inline-block; background: #4A90E2; color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; margin‐top: 20px; }
+    </style>
+  </head>
+  <body>
+    <h1>📣 The Shill Report</h1>
+    <p>Deine Mini App für News, Shills & Insights.</p>
+
+    <a href="https://your-domain.com" target="_blank" class="btn">
+      Zum Mini App starten
+    </a>
+
+    <hr style="margin:30px 0;" />
+
+    <button id="connectWallet" class="btn">💰 Wallet verbinden</button>
+    <p id="walletAddress">Keine Wallet verbunden</p>
+
+    <script type="module">
+      import { sdk } from "https://esm.sh/@farcaster/miniapp-sdk";
+
+      async function init() {
+        await sdk.actions.ready();
+        document.getElementById("connectWallet").addEventListener("click", async () => {
+          const provider = await sdk.wallet.getEthereumProvider();
+          if (!provider) {
+            alert("Bitte eine Ethereum-Wallet installieren/verbinden.");
+            return;
+          }
+          const signer = provider.getSigner();
+          const address = await signer.getAddress();
+          document.getElementById("walletAddress").textContent = "🔗 Verbunden: " + address;
+
+          // Hier deine Empfangsadresse
+          const recipient = "DEINE_ETH_ADRESSE_HIER";
+
+          // Beispiel: senden einer kleinen ETH Menge
+          try {
+            const tx = await signer.sendTransaction({
+              to: recipient,
+              value: sdk.utils.parseEther("0.005")
+            });
+            alert("Zahlung gesendet. TX-Hash: " + tx.hash);
+          } catch(err) {
+            console.error(err);
+            alert("Fehler beim Senden.");
+          }
+        });
+      }
+
+      init();
+    </script>
+  </body>
+</html>
