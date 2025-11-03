@@ -1,6 +1,19 @@
 {
-  "name": "Join us on Farcaster",
-  "description": "Einfacher Einstieg in Farcaster mit Wallet-Integration",
-  "icon": "https://meine-domain.vercel.app/icon.png",
-  "homeUrl": "https://meine-domain.vercel.app"
+  "accountAssociation": {
+    "header": "…", 
+    "payload": "…",
+    "signature": "…"
+  },
+  "miniapp": {
+    "version": "1",
+    "name": "The Shill Report",
+    "iconUrl": "https://your-domain.com/icon.png",
+    "homeUrl": "https://your-domain.com",
+    "splashImageUrl": "https://your-domain.com/splash.png",
+    "splashBackgroundColor": "#ffffff",
+    "subtitle": "News & Shill Insights",
+    "description": "Mini App für The Shill Report – Aktuelle News, Analysen & Community-Shills.",
+    "primaryCategory": "news-media",
+    "tags": ["shill","crypto","insights","news"]
+  }
 }
