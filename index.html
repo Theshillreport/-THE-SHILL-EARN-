@@ -1,62 +1,77 @@
 <!DOCTYPE html>
-<html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Mini App Embed / Meta Tags -->
-    <meta name="fc:miniapp" content='{"version":"1","imageUrl":"https://your-domain.com/preview.png","button":{"title":"Open The Shill Report","action":{"type":"launch_frame","url":"https://your-domain.com","name":"The Shill Report"}}}' />
-    <title>The Shill Report Mini App</title>
-    <style>
-      body { font-family: sans-serif; text-align: center; padding: 40px; }
-      .btn { display: inline-block; background: #4A90E2; color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; margin‐top: 20px; }
-    </style>
-  </head>
-  <body>
-    <h1>📣 The Shill Report</h1>
-    <p>Deine Mini App für News, Shills & Insights.</p>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <a href="https://the-shill-report-mini-app.vercel.app" target="_blank" class="btn">
-      Zum Mini App starten
-    </a>
-
-    <hr style="margin:30px 0;" />
-
-    <button id="connectWallet" class="btn">💰 Wallet verbinden</button>
-    <p id="walletAddress">Keine Wallet verbunden</p>
-
-    <script type="module">
-      import { sdk } from "https://esm.sh/@farcaster/miniapp-sdk";
-
-      async function init() {
-        await sdk.actions.ready();
-        document.getElementById("connectWallet").addEventListener("click", async () => {
-          const provider = await sdk.wallet.getEthereumProvider();
-          if (!provider) {
-            alert("Bitte eine Ethereum-Wallet installieren/verbinden.");
-            return;
-          }
-          const signer = provider.getSigner();
-          const address = await signer.getAddress();
-          document.getElementById("walletAddress").textContent = "🔗 Verbunden: " + address;
-
-          // Hier deine Empfangsadresse
-          const recipient = "0xfFc9Ad9B9A736544f062247Eb0D8a4F506805b69";
-
-          // Beispiel: senden einer kleinen ETH Menge
-          try {
-            const tx = await signer.sendTransaction({
-              to: recipient,
-              value: sdk.utils.parseEther("0.005")
-            });
-            alert("Zahlung gesendet. TX-Hash: " + tx.hash);
-          } catch(err) {
-            console.error(err);
-            alert("Fehler beim Senden.");
-          }
-        });
+  <!-- Mini App Embed Meta Tag -->
+  <meta name="fc:miniapp" content='{
+    "version":"1",
+    "imageUrl":"https://your-domain.com/og-image.png",
+    "button":{
+      "title":"Open The Shill Report",
+      "action":{
+        "type":"launch_miniapp",
+        "name":"The Shill Report",
+        "url":"https://your-domain.com",
+        "splashImageUrl":"https://your-domain.com/icon.png",
+        "splashBackgroundColor":"#ffffff"
       }
+    }
+  }' />
 
-      init();
-    </script>
-  </body>
+  <title>The Shill Report</title>
+  <style>
+    body { font-family:sans-serif; text-align:center; padding: 40px; }
+    .btn { display:inline-block; background:#4A90E2; color:white; padding:12px 20px; border-radius:8px; text-decoration:none; }
+  </style>
+</head>
+<body>
+  <h1>📣 The Shill Report</h1>
+  <p>Your Web3 news & insights mini-app for Farcaster.</p>
+
+  <a href="https://your-domain.com" target="_blank" class="btn">Open App</a>
+
+  <hr style="margin:30px 0;"/>
+
+  <button id="connectWallet" class="btn">💰 Connect ETH Wallet</button>
+  <p id="walletAddress">Wallet not connected</p>
+
+  <script type="module">
+    import { sdk } from "https://esm.sh/@farcaster/miniapp-sdk";
+
+    async function main(){
+      await sdk.actions.ready();
+      const btn = document.getElementById("connectWallet");
+      const addrDisplay = document.getElementById("walletAddress");
+
+      btn.addEventListener("click", async () => {
+        const provider = await sdk.wallet.getEthereumProvider();
+        if (!provider) {
+          alert("Please install or enable an Ethereum wallet.");
+          return;
+        }
+        const signer = provider.getSigner();
+        const address = await signer.getAddress();
+        addrDisplay.textContent = "🔗 Connected: " + address;
+
+        // Your receiving ETH address
+        const recipient = "YOUR_ETH_ADDRESS_HERE";
+
+        try {
+          const tx = await signer.sendTransaction({
+            to: recipient,
+            value: sdk.utils.parseEther("0.01") // example amount
+          });
+          alert("Payment sent! TX Hash: " + tx.hash);
+        } catch(err) {
+          console.error(err);
+          alert("Payment failed.");
+        }
+      });
+    }
+
+    main();
+  </script>
+</body>
 </html>
