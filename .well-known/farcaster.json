@@ -1,19 +1,18 @@
 {
   "accountAssociation": {
-    "header": "…", 
-    "payload": "…",
-    "signature": "…"
+    "header":"…",
+    "payload":"…",
+    "signature":"…"
   },
   "miniapp": {
-    "version": "1",
-    "name": "The Shill Report",
-    "iconUrl": "https://your-domain.com/icon.png",
-    "homeUrl": "https://the-shill-report-mini-app.vercel.app",
-    "splashImageUrl": "https://your-domain.com/splash.png",
-    "splashBackgroundColor": "#ffffff",
-    "subtitle": "News & Shill Insights",
-    "description": "Mini App für The Shill Report – Aktuelle News, Analysen & Community-Shills.",
-    "primaryCategory": "news-media",
-    "tags": ["shill","crypto","insights","news"]
+    "version":"1",
+    "name":"The Shill Report",
+    "iconUrl":"https://your-domain.com/icon.png",
+    "homeUrl":"https://your-domain.com",
+    "imageUrl":"https://your-domain.com/og-image.png",
+    "subtitle":"Web3 News & Shill Insights",
+    "description":"Mini App for The Shill Report – Crypto news, shills & insights.",
+    "primaryCategory":"news-media",
+    "tags":["crypto","news","shillreport","web3"]
   }
 }
