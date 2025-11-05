@@ -1,10 +1,21 @@
 <!doctype html>
 <html lang="de">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>©The Shill Earn©</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Shill Report — USDC Payment</title>
+  <script type="module">
+    import { ethers } from "https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.esm.min.js";
 
+    // --- CONFIG ---
+    const TOKEN_ADDRESS = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"; // USDC on Base
+    const RECEIVER_ADDRESS = "0xYourWalletAddressHere"; // 👉 deine Adresse hier einsetzen!
+
+    const ERC20_ABI = [
+      "function balanceOf(address owner) view returns (uint256)",
+      "function transfer(address to, uint256 amount) returns (bool)",
+      "function decimals() view returns (uint8)",
+      "function symbol() view returns (string)"
+    ]
   <!-- Farcaster Mini App Tags -->
   <meta name="fc:frame" content="vNext" />
   <meta name="fc:miniapp:name" content="©THE SHILL EARN©IO" />
